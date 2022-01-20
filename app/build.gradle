@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 
-
+ ori
 android {
     compileSdk 31
 
