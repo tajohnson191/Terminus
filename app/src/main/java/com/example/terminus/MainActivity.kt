@@ -48,18 +48,23 @@ class MainActivity : AppCompatActivity() {
         binding.letter.text = null
 }
     fun checkWord() {
+        //get the word that is being challenged
         val wordToCheck = binding.word.text.toString()
 
+        //TODO larger list of valid words or an api call
         val validWords = listOf<String>("jest", "lest", "mess")
-        val outcome : String
 
+        //check if the word being challenged is in the list of valid words
+        val outcome : String
         if (wordToCheck in validWords) {
             outcome = "$wordToCheck is a valid word!"
         } else
             outcome = "$wordToCheck is not a valid word!"
 
+        //show the outcome
         binding.outcome.text = outcome
-        binding.word.text = null
 
+        //clear out the word being challenged
+        binding.word.text = null
     }
 }
