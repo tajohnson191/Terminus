@@ -18,7 +18,7 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/winner"
+        app:layout_constraintBottom_toTopOf="@+id/outcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,30 +28,30 @@
         android:id="@+id/word"
         android:layout_width="250dp"
         android:layout_height="43dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/challengeButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_name"
         tools:text="Word" />
 
     <TextView
-        android:id="@+id/winner"
+        android:id="@+id/outcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="66dp"
+        android:layout_marginBottom="24dp"
         android:text="Outcome"
-        app:layout_constraintBottom_toTopOf="@+id/challengeButton"
+        app:layout_constraintBottom_toTopOf="@+id/word"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_name" />
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/challengeButton"
         android:layout_width="124dp"
         android:layout_height="48dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="24dp"
         android:text="Challenge"
         app:layout_constraintBottom_toTopOf="@+id/letter"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,44 +60,45 @@
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="33dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="74dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/letter"
         app:layout_constraintTop_toBottomOf="@+id/challengeButton"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <TextView
         android:id="@+id/playerTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
+        android:layout_marginEnd="64dp"
         android:text="@string/playerTwo"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="195dp" />
+        tools:layout_editor_absoluteY="176dp" />
 
     <TextView
         android:id="@+id/playerOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="36dp"
         android:text="@string/playerOne"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="202dp" />
+        tools:layout_editor_absoluteY="176dp" />
 
     <EditText
         android:id="@+id/letter"
         android:layout_width="248dp"
         android:layout_height="48dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="280dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz"
+        android:hint="@string/enter_guess"
+        android:inputType="text"
+        android:maxLength="1"
         android:text="@string/input_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:maxLength="1"
-        android:inputType="text"
-        android:digits="abcdefghijklmnopqrstuvwxyz"
-        android:hint="@string/enter_guess"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

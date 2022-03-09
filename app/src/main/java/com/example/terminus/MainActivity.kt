@@ -27,11 +27,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addToWord() {
-        //get the letter from the letter input field.
-        val stringInTextField = binding.letter.text.toString()
-
         //get the existing word
         val existingWord = binding.word.text.toString()
+
+        //clear out the prior outcome when starting a new word
+        if(existingWord == "") {
+            binding.outcome.text = null
+        }
+
+        //get the letter from the letter input field.
+        val stringInTextField = binding.letter.text.toString()
 
         //append the new letter to the existing word
         var newWord = StringBuilder(existingWord).append(stringInTextField).toString()
@@ -46,12 +51,15 @@ class MainActivity : AppCompatActivity() {
         val wordToCheck = binding.word.text.toString()
 
         val validWords = listOf<String>("jest", "lest", "mess")
+        val outcome : String
 
         if (wordToCheck in validWords) {
-            println("Valid word!")
+            outcome = "$wordToCheck is a valid word!"
         } else
-            println("Not valid word!")
+            outcome = "$wordToCheck is not a valid word!"
 
+        binding.outcome.text = outcome
+        binding.word.text = null
 
     }
 }
