@@ -29,6 +29,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.majorVersion
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

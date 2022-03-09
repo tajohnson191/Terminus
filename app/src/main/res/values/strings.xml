@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Terminus</string>
+    <string name="playerTwo">Xain</string>
+    <string name="playerOne">Trisha</string>
+    <string name="enter_guess">Enter guess</string>
+    <string name="input_text">Input text</string>
+    <string name="word">Word: %s</string>
 </resources>
