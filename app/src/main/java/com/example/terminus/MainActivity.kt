@@ -64,9 +64,11 @@ class MainActivity : AppCompatActivity() {
 
             //show outcome
             binding.outcome.text = outcome
+
+            //clear out existing word
+            binding.word.text = null
         }
-        //clear out existing word
-        binding.word.text = null
+
     }
 
     fun checkWord() {
