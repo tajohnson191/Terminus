@@ -124,11 +124,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //TODO variables for player one and player two names
     fun player1() {
         binding.playerOne.text = "It's Trisha's turn"
         binding.playerTwo.text = "It's not Xain's turn"
     }
 
+    //TODO variables for player one and player two names
     fun player2() {
         binding.playerOne.text = "It's not Trisha's turn"
         binding.playerTwo.text = "It's Xain's's turn"
