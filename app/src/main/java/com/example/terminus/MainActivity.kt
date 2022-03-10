@@ -1,5 +1,6 @@
 package com.example.terminus
 
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.terminus.databinding.ActivityMainBinding
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     fun checkWordDuring(word: String) {
         if (word in validWords) {
             val loser = if (playerOne) "Trisha" else "Xain"
-            outcome = "$word is a valid word!  $loser has lost!"
+            outcome = "$word is a valid word! $loser has lost!"
 
             //show outcome
             binding.outcome.text = outcome
@@ -124,16 +125,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //TODO variables for player one and player two names
+    //TODO variables for player one and player two names and change formatting more
     fun player1() {
-        binding.playerOne.text = "It's Trisha's turn"
-        binding.playerTwo.text = "It's not Xain's turn"
+        binding.playerOne.typeface = Typeface.DEFAULT_BOLD
+        binding.playerTwo.typeface = Typeface.DEFAULT
     }
 
-    //TODO variables for player one and player two names
+    //TODO variables for player one and player two names and change formatting more
     fun player2() {
-        binding.playerOne.text = "It's not Trisha's turn"
-        binding.playerTwo.text = "It's Xain's's turn"
+        binding.playerOne.typeface = Typeface.DEFAULT
+        binding.playerTwo.typeface = Typeface.DEFAULT_BOLD
 
     }
 }
