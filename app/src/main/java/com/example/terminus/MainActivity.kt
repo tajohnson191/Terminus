@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     //TODO larger list of valid words or an api call
     val validWords = listOf<String>("trade", "juice", "horse")
     var outcome: String = ""
+    var playerOne = true
+    var playerTwo = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 
         //sets the contentView of the activity, instead of passing the resource ID. Specifies the root of the hierarchy of your views
         setContentView(binding.root)
+
+        //set player one as
+        determineTurn(true)
 
         //add a click listener to the submit button
         binding.submitButton.setOnClickListener { addToWord() }
@@ -56,11 +61,15 @@ class MainActivity : AppCompatActivity() {
         if (newWord.length > 4) {
             checkWordDuring(newWord)
         }
+
+        //switch whose turn it is after the letter is entered.
+        determineTurn(false)
     }
 
     fun checkWordDuring(word: String) {
         if (word in validWords) {
-            outcome = "$word is a valid word!  You lose!"
+            val loser = if (playerOne) "Trisha" else "Xain"
+            outcome = "$word is a valid word!  $loser has lost!"
 
             //show outcome
             binding.outcome.text = outcome
@@ -95,5 +104,34 @@ class MainActivity : AppCompatActivity() {
 
         //clear out the word being challenged
         binding.word.text = null
+    }
+
+    //determine whose turn it should be
+    fun determineTurn(firstTime: Boolean) {
+
+        if (firstTime) {
+            player1()
+        } else {
+            if (playerOne) {
+                playerOne = false
+                playerTwo = true
+                player2()
+            } else {
+                playerOne = true
+                playerTwo = false
+                player1()
+            }
+        }
+    }
+
+    fun player1() {
+        binding.playerOne.text = "It's Trisha's turn"
+        binding.playerTwo.text = "It's not Xain's turn"
+    }
+
+    fun player2() {
+        binding.playerOne.text = "It's not Trisha's turn"
+        binding.playerTwo.text = "It's Xain's's turn"
+
     }
 }
