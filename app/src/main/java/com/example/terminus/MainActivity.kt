@@ -1,8 +1,9 @@
 package com.example.terminus
 
+import android.content.Context
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.terminus.databinding.ActivityMainBinding
 
 
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         determineTurn(false)
     }
 
+
     fun checkWordDuring(word: String) {
         if (word in validWords) {
             val loser = if (playerOne) "Trisha" else "Xain"
@@ -83,6 +85,8 @@ class MainActivity : AppCompatActivity() {
 
     fun checkWord() {
 
+        //if challenge is hit, let the other player keep typing and then click submit.
+
         //get the word that is being challenged
         val wordToCheck = binding.word.text.toString()
 
@@ -92,7 +96,8 @@ class MainActivity : AppCompatActivity() {
 
         //if word being challenged is at least 5 letters, determine if it's in the valid words
         if (wordToCheck.length < 4) {
-            outcome = "$wordToCheck is too short!"
+            val loser = if (playerOne) "Trisha" else "Xain"
+            outcome = "$wordToCheck is too short! $loser loses!"
         } else {
             if (wordToCheck in validWords) {
                 outcome = "$wordToCheck is a valid word!"
