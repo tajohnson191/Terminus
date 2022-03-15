@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     //TODO larger list of valid words or an api call
-    val validWords = listOf<String>("trade", "juice", "horse")
+    val validWords = listOf<String>("trade", "juice", "horse","apples")
     var outcome: String = ""
     var playerOne = true
     var playerTwo = false
@@ -35,7 +35,36 @@ class MainActivity : AppCompatActivity() {
         binding.submitButton.setOnClickListener { addToWord() }
 
         //add a click listener to the challenge button
-        binding.challengeButton.setOnClickListener { checkWord() }
+        binding.challengeButton.setOnClickListener { finalWord() }
+    }
+
+    private fun finalWord() {
+        /// TODO: new function that allows challenge button presser to type out rest of word that was being spelled
+        /// TODO: when submit pressed different submit button function here, calls determineWinner
+    }
+
+    private fun determineWinner(word:String){
+        if(word.length >= 5) {
+            if (checkWord(word)) {
+                val loser = if (playerOne) "Trisha" else "Xain"
+                outcome = "$word is a valid word! $loser has lost!"
+
+                //show outcome
+                binding.outcome.text = outcome
+
+                //clear out existing word
+                binding.word.text = null
+            }
+        } else {
+            val loser = if (!playerOne) "Trisha" else "Xain"
+            outcome = "$word is not a valid word! $loser has lost!"
+
+            //show outcome
+            binding.outcome.text = outcome
+
+            //clear out existing word
+            binding.word.text = null
+        }
     }
 
     fun addToWord() {
@@ -60,57 +89,65 @@ class MainActivity : AppCompatActivity() {
         binding.letter.text = null
 
         //determine if the word entered is at least 5 characters and a word
-        if (newWord.length > 4) {
-            checkWordDuring(newWord)
-        }
+//        if (newWord.length > 4) {
+//            checkWordDuring(newWord)
+//        }
+
 
         //switch whose turn it is after the letter is entered.
         determineTurn(false)
     }
 
+//
+//    fun checkWordDuring(word: String) {
+//        if (word in validWords) {
+//            val loser = if (playerOne) "Trisha" else "Xain"
+//            outcome = "$word is a valid word! $loser has lost!"
+//
+//            //show outcome
+//            binding.outcome.text = outcome
+//
+//            //clear out existing word
+//            binding.word.text = null
+//        }
+//
+//    }
 
-    fun checkWordDuring(word: String) {
-        if (word in validWords) {
-            val loser = if (playerOne) "Trisha" else "Xain"
-            outcome = "$word is a valid word! $loser has lost!"
-
-            //show outcome
-            binding.outcome.text = outcome
-
-            //clear out existing word
-            binding.word.text = null
-        }
-
-    }
-
-    fun checkWord() {
-
-        //if challenge is hit, let the other player keep typing and then click submit.
-
-        //get the word that is being challenged
-        val wordToCheck = binding.word.text.toString()
-
-
-        //check if the word being challenged is in the list of valid words
-        val outcome: String
-
-        //if word being challenged is at least 5 letters, determine if it's in the valid words
-        if (wordToCheck.length < 4) {
-            val loser = if (playerOne) "Trisha" else "Xain"
-            outcome = "$wordToCheck is too short! $loser loses!"
+    fun checkWord(wordToCheck:String):Boolean {
+        if (wordToCheck.length < 5) {
+            return false;
         } else {
-            if (wordToCheck in validWords) {
-                outcome = "$wordToCheck is a valid word!"
-            } else
-                outcome = "$wordToCheck is not a valid word!"
+            return wordToCheck in validWords
         }
-
-        //show the outcome
-        binding.outcome.text = outcome
-
-        //clear out the word being challenged
-        binding.word.text = null
     }
+
+//        //if challenge is hit, let the other player keep typing and then click submit.
+//
+//        //get the word that is being challenged
+//        val wordToCheck = binding.word.text.toString()
+//
+//
+//        //check if the word being challenged is in the list of valid words
+//        val outcome: String
+//
+//        //if word being challenged is at least 5 letters, determine if it's in the valid words
+//        if (wordToCheck.length < 4) {
+//            val loser = if (playerOne) "Trisha" else "Xain"
+//            outcome = "$wordToCheck is too short! $loser loses!"
+//        } else {
+//            if (wordToCheck in validWords) {
+//                outcome = "$wordToCheck is a valid word!" + if (!playerOne) " Trisha wins" else " Xain wins"
+//
+//            } else
+//                outcome = "$wordToCheck is not a valid word!" + if (playerOne) " Trisha loses" else " Xain loses"
+//
+//        }
+//
+//        //show the outcome
+//        binding.outcome.text = outcome
+//
+//        //clear out the word being challenged
+//        binding.word.text = null
 
     //determine whose turn it should be
     fun determineTurn(firstTime: Boolean) {
