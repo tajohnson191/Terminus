@@ -8,6 +8,8 @@ import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.terminus.databinding.ActivityMainBinding
+import android.text.Editable
+import android.text.TextWatcher
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +24,15 @@ class MainActivity : AppCompatActivity() {
     var playerOne = true
     var playerTwo = false
 
+    private val textWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            println("found it after!")
+            addToWord() //problem is that clearing the field does this too, which gets us in a loop
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +44,8 @@ class MainActivity : AppCompatActivity() {
 
         //set player one as
         determineTurn(true)
+
+        binding.letter.addTextChangedListener(textWatcher)
 
         //add a click listener to the submit button
         binding.submitButton.setOnClickListener { addToWord() }
@@ -100,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         binding.word.text = newWord
 
         //clear out the existing letter after it's appended
-        binding.letter.text = null
+        //binding.letter.text = null
 
         //determine if the word entered is at least 5 characters and a word
 //        if (newWord.length > 4) {
