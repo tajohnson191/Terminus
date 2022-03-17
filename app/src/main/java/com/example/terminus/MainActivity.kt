@@ -1,9 +1,12 @@
 package com.example.terminus
 
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.terminus.databinding.ActivityMainBinding
 
 
@@ -33,12 +36,23 @@ class MainActivity : AppCompatActivity() {
 
         //add a click listener to the submit button
         binding.submitButton.setOnClickListener { addToWord() }
+//        binding.submitButton.isVisible = false
+//        binding.letter.
+
 
         //add a click listener to the challenge button
         binding.challengeButton.setOnClickListener { finalWord() }
     }
 
     private fun finalWord() {
+
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = LengthFilter(45)
+        binding.letter.filters = filterArray
+        binding.submitButton.isVisible = true
+//        determineWinner(binding.letter.text.toString())
+
+
         /// TODO: new function that allows challenge button presser to type out rest of word that was being spelled
         /// TODO: when submit pressed different submit button function here, calls determineWinner
     }
@@ -115,7 +129,7 @@ class MainActivity : AppCompatActivity() {
 
     fun checkWord(wordToCheck:String):Boolean {
         if (wordToCheck.length < 5) {
-            return false;
+            return false
         } else {
             return wordToCheck in validWords
         }
@@ -178,5 +192,44 @@ class MainActivity : AppCompatActivity() {
         binding.playerOne.typeface = Typeface.DEFAULT
         binding.playerTwo.typeface = Typeface.DEFAULT_BOLD
 
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_A,
+            KeyEvent.KEYCODE_B,
+            KeyEvent.KEYCODE_C,
+            KeyEvent.KEYCODE_D,
+            KeyEvent.KEYCODE_E,
+            KeyEvent.KEYCODE_F,
+            KeyEvent.KEYCODE_G,
+            KeyEvent.KEYCODE_H,
+            KeyEvent.KEYCODE_I,
+            KeyEvent.KEYCODE_J,
+            KeyEvent.KEYCODE_K,
+            KeyEvent.KEYCODE_L,
+            KeyEvent.KEYCODE_M,
+            KeyEvent.KEYCODE_N,
+            KeyEvent.KEYCODE_O,
+            KeyEvent.KEYCODE_P,
+            KeyEvent.KEYCODE_Q,
+            KeyEvent.KEYCODE_R,
+            KeyEvent.KEYCODE_S,
+            KeyEvent.KEYCODE_T,
+            KeyEvent.KEYCODE_U,
+            KeyEvent.KEYCODE_V,
+            KeyEvent.KEYCODE_W,
+            KeyEvent.KEYCODE_X,
+            KeyEvent.KEYCODE_Y,
+            KeyEvent.KEYCODE_Z,
+            -> {
+
+                addToWord()
+                println("yo")
+                return true
+            }
+
+        }
+        return super.onKeyUp(keyCode, event)
     }
 }
