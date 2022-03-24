@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
@@ -88,6 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--todo change appearance of letter + the size of it-->
     <EditText
         android:id="@+id/letter"
         android:layout_width="248dp"

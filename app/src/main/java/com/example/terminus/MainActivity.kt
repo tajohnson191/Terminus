@@ -10,7 +10,8 @@ import androidx.core.view.isVisible
 import com.example.terminus.databinding.ActivityMainBinding
 import android.text.Editable
 import android.text.TextWatcher
-
+///todo make it so you cannot spam the challenge button
+///todo learn how to link pages together
 
 class MainActivity : AppCompatActivity() {
 
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             //clear out existing word
             binding.word.text = null
         }
+        /// todo: add new game button here that calls the reset and prompts the other player if they would like to join.
     }
     fun addToWord(isChallenge : Boolean){//get the existing word
         val existingWord = binding.word.text.toString()
