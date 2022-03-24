@@ -162,30 +162,14 @@ class MainActivity : AppCompatActivity() {
         binding.letter.text = null
         binding.letter.addTextChangedListener(textWatcher)
 
-        //determine if the word entered is at least 5 characters and a word
-//        if (newWord.length > 4) {
-//            checkWordDuring(newWord)
-//        }
-
+        if(checkWord(newWord) && newWord.length>= 5) {
+            determineWinner(newWord)
+        }
 
         //switch whose turn it is after the letter is entered.
         determineTurn(false)
     }
 
-//
-//    fun checkWordDuring(word: String) {
-//        if (word in validWords) {
-//            val loser = if (playerOne) "Trisha" else "Xain"
-//            outcome = "$word is a valid word! $loser has lost!"
-//
-//            //show outcome
-//            binding.outcome.text = outcome
-//
-//            //clear out existing word
-//            binding.word.text = null
-//        }
-//
-//    }
 
     fun checkWord(wordToCheck:String):Boolean {
         if (wordToCheck.length < 5) {
@@ -194,34 +178,6 @@ class MainActivity : AppCompatActivity() {
             return wordToCheck in validWords
         }
     }
-
-//        //if challenge is hit, let the other player keep typing and then click submit.
-//
-//        //get the word that is being challenged
-//        val wordToCheck = binding.word.text.toString()
-//
-//
-//        //check if the word being challenged is in the list of valid words
-//        val outcome: String
-//
-//        //if word being challenged is at least 5 letters, determine if it's in the valid words
-//        if (wordToCheck.length < 4) {
-//            val loser = if (playerOne) "Trisha" else "Xain"
-//            outcome = "$wordToCheck is too short! $loser loses!"
-//        } else {
-//            if (wordToCheck in validWords) {
-//                outcome = "$wordToCheck is a valid word!" + if (!playerOne) " Trisha wins" else " Xain wins"
-//
-//            } else
-//                outcome = "$wordToCheck is not a valid word!" + if (playerOne) " Trisha loses" else " Xain loses"
-//
-//        }
-//
-//        //show the outcome
-//        binding.outcome.text = outcome
-//
-//        //clear out the word being challenged
-//        binding.word.text = null
 
     //determine whose turn it should be
     fun determineTurn(firstTime: Boolean) {
@@ -252,44 +208,5 @@ class MainActivity : AppCompatActivity() {
         binding.playerOne.typeface = Typeface.DEFAULT
         binding.playerTwo.typeface = Typeface.DEFAULT_BOLD
 
-    }
-
-    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        when (keyCode) {
-            KeyEvent.KEYCODE_A,
-            KeyEvent.KEYCODE_B,
-            KeyEvent.KEYCODE_C,
-            KeyEvent.KEYCODE_D,
-            KeyEvent.KEYCODE_E,
-            KeyEvent.KEYCODE_F,
-            KeyEvent.KEYCODE_G,
-            KeyEvent.KEYCODE_H,
-            KeyEvent.KEYCODE_I,
-            KeyEvent.KEYCODE_J,
-            KeyEvent.KEYCODE_K,
-            KeyEvent.KEYCODE_L,
-            KeyEvent.KEYCODE_M,
-            KeyEvent.KEYCODE_N,
-            KeyEvent.KEYCODE_O,
-            KeyEvent.KEYCODE_P,
-            KeyEvent.KEYCODE_Q,
-            KeyEvent.KEYCODE_R,
-            KeyEvent.KEYCODE_S,
-            KeyEvent.KEYCODE_T,
-            KeyEvent.KEYCODE_U,
-            KeyEvent.KEYCODE_V,
-            KeyEvent.KEYCODE_W,
-            KeyEvent.KEYCODE_X,
-            KeyEvent.KEYCODE_Y,
-            KeyEvent.KEYCODE_Z,
-            -> {
-
-                addToWord()
-                println("yo")
-                return true
-            }
-
-        }
-        return super.onKeyUp(keyCode, event)
     }
 }
