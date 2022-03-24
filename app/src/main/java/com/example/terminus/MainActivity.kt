@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         override fun afterTextChanged(s: Editable) {
-            println("found it after!")
-            addToWord() //problem is that clearing the field does this too, which gets us in a loop
+            addToWord()
         }
     }
 
@@ -113,7 +112,9 @@ class MainActivity : AppCompatActivity() {
         binding.word.text = newWord
 
         //clear out the existing letter after it's appended
-        //binding.letter.text = null
+        binding.letter.removeTextChangedListener(textWatcher)
+        binding.letter.text = null
+        binding.letter.addTextChangedListener(textWatcher)
 
         //determine if the word entered is at least 5 characters and a word
 //        if (newWord.length > 4) {
