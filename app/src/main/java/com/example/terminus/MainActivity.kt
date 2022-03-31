@@ -10,7 +10,6 @@ import androidx.core.view.isVisible
 import com.example.terminus.databinding.ActivityMainBinding
 import android.text.Editable
 import android.text.TextWatcher
-///todo make it so you cannot spam the challenge button
 ///todo learn how to link pages together
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     var outcome: String = ""
     var playerOne = true
     var playerTwo = false
+    var isChallenged = false
 
     private val textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val textWatcher2: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {binding.challengeButton.isVisible = true}
         override fun afterTextChanged(s: Editable) {
             addToWord(true)
         }
@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.letter.addTextChangedListener(textWatcher)
 
+        binding.newGameButton.setOnClickListener{ resetGame() }
+
         //add a click listener to the submit button
         binding.submitButton.setOnClickListener { determineWinner(binding.word.text.toString()) }
         binding.submitButton.isVisible = false
@@ -63,27 +65,37 @@ class MainActivity : AppCompatActivity() {
         //add a click listener to the challenge button
         binding.challengeButton.setOnClickListener { finalWord() }
     }
+
     private fun resetGame(){ //called from new game
         binding.submitButton.isVisible = false
+        if (binding.letter.text.toString() == "") {
+            binding.outcome.text = null
+        }
         determineTurn(true)
 
     }
 
     private fun finalWord() {
+        //hide challenge button
+        binding.challengeButton.isVisible = false
+        //switch players
         determineTurn(false)
+        //change text watcher
         binding.letter.removeTextChangedListener(textWatcher)
         binding.letter.addTextChangedListener(textWatcher2)
+        //limit number of characters
         val filterArray = arrayOfNulls<InputFilter>(1)
         filterArray[0] = LengthFilter(45)
         binding.letter.filters = filterArray
+        //make submit button visible
         binding.submitButton.isVisible = true
+        //add to word
         addToWord(true)
-//        determineWinner(binding.letter.text.toString())
-        /// TODO: new function that allows challenge button presser to type out rest of word that was being spelled
-        /// TODO: when submit pressed different submit button function here, calls determineWinner
+        isChallenged = true
     }
 
     private fun determineWinner(word:String){
+        if(isChallenged){determineTurn(false)}
         if(word.length >= 5) {
             println(checkWord(word).toString())
             if (checkWord(word)) {
@@ -143,6 +155,8 @@ class MainActivity : AppCompatActivity() {
 
     fun addToWord() {
         //get the existing word
+
+
         val existingWord = binding.word.text.toString()
 
         //clear out the prior outcome when starting a new word
