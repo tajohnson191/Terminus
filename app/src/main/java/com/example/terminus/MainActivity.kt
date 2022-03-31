@@ -4,13 +4,14 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
-import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.terminus.databinding.ActivityMainBinding
 import android.text.Editable
 import android.text.TextWatcher
 ///todo learn how to link pages together
+///todo fix resseting game, intent, currently creating 2x instances every new game call.
+///todo change who starts every new game if t first then x, if x then t.
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,9 +33,9 @@ class MainActivity : AppCompatActivity() {
             addToWord()
         }
     }
-    private val textWatcher2: TextWatcher = object : TextWatcher {
+    private val textWatchChallenge: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {binding.challengeButton.isVisible = true}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         override fun afterTextChanged(s: Editable) {
             addToWord(true)
         }
@@ -64,14 +65,19 @@ class MainActivity : AppCompatActivity() {
 
         //add a click listener to the challenge button
         binding.challengeButton.setOnClickListener { finalWord() }
+        binding.challengeButton.isVisible = false
     }
 
     private fun resetGame(){ //called from new game
         binding.submitButton.isVisible = false
+        binding.challengeButton.isVisible = false
+        binding.word.text = ""
         if (binding.letter.text.toString() == "") {
             binding.outcome.text = null
         }
         determineTurn(true)
+        binding.letter.removeTextChangedListener(textWatchChallenge)
+        binding.letter.addTextChangedListener(textWatcher)
 
     }
 
@@ -82,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         determineTurn(false)
         //change text watcher
         binding.letter.removeTextChangedListener(textWatcher)
-        binding.letter.addTextChangedListener(textWatcher2)
+        binding.letter.addTextChangedListener(textWatchChallenge)
         //limit number of characters
         val filterArray = arrayOfNulls<InputFilter>(1)
         filterArray[0] = LengthFilter(45)
@@ -147,14 +153,15 @@ class MainActivity : AppCompatActivity() {
         binding.word.text = newWord
 
         //clear out the existing letter after it's appended
-        binding.letter.removeTextChangedListener(textWatcher2)
+        binding.letter.removeTextChangedListener(textWatchChallenge)
         binding.letter.text = null
-        binding.letter.addTextChangedListener(textWatcher2)
+        binding.letter.addTextChangedListener(textWatchChallenge)
 
     }
 
     fun addToWord() {
         //get the existing word
+        binding.challengeButton.isVisible = true
 
 
         val existingWord = binding.word.text.toString()
