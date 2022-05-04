@@ -14,6 +14,8 @@ class HomePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
+        val idk = CreateWordJSON()
+        idk.CreateWord()
 
         nextActivityButton = findViewById<View>(R.id.button) as Button
         question1 = findViewById<View>(R.id.textView2) as TextView

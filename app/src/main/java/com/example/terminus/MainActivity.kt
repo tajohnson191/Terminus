@@ -6,9 +6,11 @@ import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.terminus.databinding.ActivityMainBinding
 import android.text.Editable
 import android.text.TextWatcher
+import com.example.terminus.databinding.ActivityMainBinding
+import java.io.File
+
 ///todo learn how to link pages together
 ///todo fix resseting game, intent, currently creating 2x instances every new game call.
 ///todo change who starts every new game if t first then x, if x then t.
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     //TODO larger list of valid words or an api call
-    val validWords = listOf<String>("trade", "juice", "horse","apples")
+    val validWords: List<String> = File("newWords").readLines()
     var outcome: String = ""
     var playerOne = true
     var playerTwo = false

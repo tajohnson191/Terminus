@@ -23,7 +23,7 @@
         android:id="@+id/Z"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="4dp"
         android:text="@string/Z"
         app:layout_constraintBottom_toBottomOf="@+id/X"
         app:layout_constraintEnd_toStartOf="@+id/X"
@@ -106,8 +106,8 @@
 
     <Button
         android:id="@+id/S"
-        android:layout_width="29dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="6dp"
         android:text="@string/S"
         app:layout_constraintEnd_toStartOf="@+id/D"
@@ -124,7 +124,7 @@
 
     <Button
         android:id="@+id/L"
-        android:layout_width="48dp"
+        android:layout_width="36dp"
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:text="@string/L"
@@ -200,15 +200,13 @@
         android:layout_height="48dp"
         android:layout_marginEnd="6dp"
         android:text="@string/E"
-        app:layout_constraintBottom_toBottomOf="@+id/R"
-        app:layout_constraintEnd_toStartOf="@+id/R" />
+        tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/R"
+        android:id="@+id/Rbutton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="6dp"
-        android:text="@string/R"
         app:layout_constraintBottom_toBottomOf="@+id/T"
         app:layout_constraintEnd_toStartOf="@+id/T" />
 
@@ -241,7 +239,7 @@
 
     <Button
         android:id="@+id/P"
-        android:layout_width="48dp"
+        android:layout_width="36dp"
         android:layout_height="48dp"
         android:layout_marginEnd="2dp"
         android:text="@string/P"
