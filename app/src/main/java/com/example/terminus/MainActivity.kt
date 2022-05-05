@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     //TODO larger list of valid words or an api call
-    val validWords: List<String> = File("newWords").readLines()
+//    val validWords: List<String> = File("newWords.JSON").readLines()
+    val validWords: List<String> = listOf("apple","horse")
     var outcome: String = ""
     var playerOne = true
     var playerTwo = false
